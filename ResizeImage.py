@@ -2,10 +2,11 @@ import cv2
 import os
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import ttk
 
 # تعيين حجم النافذة
 root = tk.Tk()
-root.geometry("259x432")
+root.geometry("259x482")
 
 # حدد مجلد الصور
 def select_folder():
@@ -24,7 +25,15 @@ def resize_images():
     height = int(entry_y.get())
     dim = (width, height)
 
+    # حساب عدد الصور في المجلد
+    num_files = len([f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))])
+
+    # إنشاء شريط التقدم
+    progress_bar = ttk.Progressbar(root, orient="horizontal", length=200, mode="determinate")
+    progress_bar.pack(pady=20)
+
     # حلقة لتطبيق الأمر على جميع الصور في المجلد
+    count = 0
     for filename in os.listdir(folder_path):
         if filename.endswith(".jpg") or filename.endswith(".png"): 
             # تحميل الصورة
@@ -40,6 +49,14 @@ def resize_images():
                 cv2.imwrite(os.path.join(folder_path, filename), resized)
         else:
             continue
+
+        # تحديث قيمة شريط التقدم
+        count += 1
+        progress_bar['value'] = (count / num_files) * 100
+        root.update_idletasks()
+
+    # إخفاء شريط التقدم بعد الانتهاء من تغيير حجم الصور
+    progress_bar.pack_forget()
 
 # إنشاء الزر لتحديد المجلد
 button1 = tk.Button(root, text='Select image Folder', command=select_folder)
@@ -60,7 +77,7 @@ entry_y.pack()
 button2 = tk.Button(root, text='Select Export Folder', command=select_export_folder)
 button2.pack(pady=20)
 
-# إنشاء الزر لتغيير حجم الصور
+# إنشاء الزر لتغيير حجم الصور وإضافة شريط التقدم
 button3 = tk.Button(root, text='Resize Images', command=resize_images)
 button3.pack(pady=20)
 
@@ -68,4 +85,5 @@ button3.pack(pady=20)
 signature = tk.Label(root, text="By Bigwolf", font=("Arial Bold", 10))
 signature.pack(side="bottom")
 
+root.title("ResizeImage")
 root.mainloop()
