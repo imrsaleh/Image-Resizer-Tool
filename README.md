@@ -1,5 +1,5 @@
 # Image-Resizer-Tool
-Open Source app to adjust all images in the folder jpg or png width and height X/Y
+Open Source app with gui interface to adjust all images in the folder jpg or png width and height X/Y
 
 
 installation:
@@ -10,9 +10,14 @@ installation:
 
 Usage:
 -open run.bat file
+
 choose image folder
+
 enter width and height you want
+
 choose export folder
+
 press resize images botton
+
 done
 
