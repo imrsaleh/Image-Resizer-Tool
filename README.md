@@ -11,7 +11,7 @@ installation:
 Usage:
 -open run.bat file
 choose image foleder
-inter width and height you want
+enter width and height you want
 choose export folder
 press resize images botton
 done
