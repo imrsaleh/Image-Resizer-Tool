@@ -10,7 +10,7 @@ installation:
 
 Usage:
 -open run.bat file
-choose image foleder
+choose image folder
 enter width and height you want
 choose export folder
 press resize images botton
